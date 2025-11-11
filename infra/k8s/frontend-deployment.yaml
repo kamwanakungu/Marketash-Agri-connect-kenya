@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: agriconnect-frontend
+  labels:
+    app: agriconnect
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: agriconnect
+  template:
+    metadata:
+      labels:
+        app: agriconnect
+    spec:
+      containers:
+        - name: frontend
+          image: agriconnect-frontend:latest
+          ports:
+            - containerPort: 5173
+          env:
+            - name: REACT_APP_API_URL
+              value: "http://backend-service:5000/api/v1"
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "256Mi"
+              cpu: "250m"

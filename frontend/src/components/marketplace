@@ -1,0 +1,26 @@
+import React from 'react';
+import ListingCard from './ListingCard';
+import SearchBar from './SearchBar';
+
+const Marketplace = () => {
+  // Sample data for listings
+  const listings = [
+    { id: 1, title: 'Fresh Tomatoes', price: 100, imageUrl: 'tomatoes.jpg' },
+    { id: 2, title: 'Organic Potatoes', price: 150, imageUrl: 'potatoes.jpg' },
+    // Add more listings as needed
+  ];
+
+  return (
+    <div className="marketplace">
+      <h1 className="text-2xl font-bold mb-4">Marketplace</h1>
+      <SearchBar />
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {listings.map(listing => (
+          <ListingCard key={listing.id} listing={listing} />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default Marketplace;

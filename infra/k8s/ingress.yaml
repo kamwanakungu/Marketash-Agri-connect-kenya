@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: agriconnect-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - host: agriconnect.example.com
+      http:
+        paths:
+          - path: /api/v1
+            pathType: Prefix
+            backend:
+              service:
+                name: agriconnect-backend
+                port:
+                  number: 5000
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: agriconnect-frontend
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - agriconnect.example.com
+      secretName: agriconnect-tls-secret
